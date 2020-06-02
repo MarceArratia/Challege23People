@@ -1,6 +1,9 @@
 package com.api.model;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,6 +26,15 @@ public class Student {
    
    @Column 
    private String code;
+   
+   //Validate the check digit
+   
+	public static String dv ( String rut ) {
+		Integer M=0,S=1,T=Integer.parseInt(rut);
+		for (;T!=0;T=(int) Math.floor(T/=10))
+			S=(S+T%10*(9-M++%6))%11;
+		return ( S > 0 ) ? String.valueOf(S-1) : "k";		
+	}
 
    public String getRut() {
 	return rut;

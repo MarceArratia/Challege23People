@@ -2,6 +2,8 @@ package com.api.rest;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,14 +24,24 @@ import com.api.model.Student;
 
 
 public class StudentRest {
+	Student objStudent = new Student();
 
 	@Autowired
     private StudentDAO studentDAO;
 	
 	@PostMapping("/saveStudent") //localhost:8080/students/saveStudent
 	//Save data
-	public void saveStudent(@RequestBody Student student) {
-		studentDAO.save(student);
+	public void saveStudent(@RequestBody Student student,HttpServletResponse response) {
+		String[] dvUser= student.getRut().split("-");
+		String dv = objStudent.dv(dvUser[0]);
+		
+		if(dv == dvUser[1]) {
+			studentDAO.save(student);
+		
+		}else {
+			response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+		}
+		
 		
 	}
 	
