@@ -25,7 +25,7 @@ public class Student {
    private int age;
    
    @Column 
-   private String code;
+   private int course;
    
    //Validate the check digit
    
@@ -65,17 +65,21 @@ public class Student {
 	}
 
 	public void setAge(int age) {
+		if(age<18) {
+			throw new java.lang.UnsupportedOperationException("Not supported yet.");
+		}
+		else
+		{
 	this.age = age;
+		}
 	}
 
-	public String getCode() {
-	return code;
+	public int setCourse() {
+		return course;
 	}
-
-	public void setCode(String code) {
-	this.code = code;
-	}
-   
+   public void setCourse(int course) {
+	   this.course=course;
+   }
    
    
    
