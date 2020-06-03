@@ -66,7 +66,7 @@ public class Student {
 
 	public void setAge(int age) {
 		if(age<18) {
-			throw new java.lang.UnsupportedOperationException("Not supported yet.");
+			throw new java.lang.UnsupportedOperationException("You must enter an age greater than or equal to 18 years.");
 		}
 		else
 		{
